@@ -29,6 +29,8 @@ def train_model(model, train_loader, val_loader, class_weights,
     best_val_f1 = 0.0
     epochs_no_improve = 0
 
+    history = {'train_loss': [], 'val_loss': [], 'val_f1_macro': []}
+
     for epoch in range(1, n_epochs + 1):
         # ---- treino ----
         model.train()
@@ -69,6 +71,10 @@ def train_model(model, train_loader, val_loader, class_weights,
 
         scheduler.step(val_f1)
 
+        history['train_loss'].append(train_loss)
+        history['val_loss'].append(val_loss)
+        history['val_f1_macro'].append(val_f1)
+
         print(f'Época {epoch:02d} | train_loss: {train_loss:.4f} | '
               f'val_loss: {val_loss:.4f} | val_f1_macro: {val_f1:.4f}')
 
@@ -86,7 +92,7 @@ def train_model(model, train_loader, val_loader, class_weights,
 
     print(f'\nMelhor val_f1_macro: {best_val_f1:.4f}')
     model.load_state_dict(torch.load(checkpoint_path))
-    return model
+    return model, history
 
 
 def evaluate_model(model, test_loader, device=None, class_names=('N', 'S', 'V', 'F', 'Q')):
