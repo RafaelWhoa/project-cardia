@@ -1,1 +1,42 @@
+# Dados (base MIT-BIH e arrays processados)
 data/
+*.npy
+*.npz
+*.dat
+*.hea
+*.atr
+data_physionet.org_iles_mitdb_.0.0
+
+# Checkpoints e modelos treinados
+models/
+*.pt
+*.pth
+
+# Imagens geradas (descomente se quiser versionar os gráficos do README)
+# *.png
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+
+# Ambientes virtuais
+.venv/
+venv/
+env/
+
+# Jupyter / Colab
+.ipynb_checkpoints/
+
+# Editores e sistema
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Segredos (nunca versionar tokens)
+.env
+*.token
